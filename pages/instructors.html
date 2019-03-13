@@ -22,7 +22,16 @@ permalink: /instructors/
   <a href="/instructors-map/">View a map of our Instructors</a>
 </p>
 
-{% assign people_list = site.data.publish_instructors %}
+<!-- See https://stackoverflow.com/questions/42722902/and-or-on-a-where-exp-expression-on-jekyll -->
+
+{% assign people_list = "" %}
+
+{% for person in site.data.publish_instructors %}
+{% if person.badges contains '2' or person.badges contains '5' or person.badges contains '10' %}
+{% assign people_list = people_list | push:person %}
+{% endif %}
+{% endfor %}
+
 
 {% include community_profiles.md %}
 
